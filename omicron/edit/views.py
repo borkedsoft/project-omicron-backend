@@ -2,6 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def index(request):
-    return HttpResponse("Hello, world! Return the frontend stuff pls!")
+    return HttpResponse("Hello, world! Testing this more!")
 
 # Create your views here.
