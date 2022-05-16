@@ -18,6 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     # TODO: main intro page
-    path('', include('edit.urls')),
-    path('admin/', admin.site.urls),
+    path('',        include('edit.urls')),
+    path('admin/',  admin.site.urls),
+    path('deploy/', include('deploy.urls')),
 ]
