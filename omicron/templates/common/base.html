@@ -47,9 +47,13 @@
                                 <a class="nav-link active" href="#">Explore</a>
                             </li>
                         </ul>
-                        <form class="d-flex">
-                            <button class="btn btn-outline-success" type="submit">Login</button>
-                        </form>
+
+                        {% if request.user.is_authenticated %}
+                        <span>sup {{ request.user.username }}</span>
+                        <a class="btn btn-outline-danger" href="{% url 'user_stuff:logout' %}">Sign out</a>
+                        {% else %}
+                        <a class="btn btn-outline-success" href="{% url 'user_stuff:login' %}">Login</a>
+                        {% endif %}
                     </div>
                 </div>
             </nav>
