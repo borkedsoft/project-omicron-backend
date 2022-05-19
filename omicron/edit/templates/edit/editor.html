@@ -1,0 +1,18 @@
+<!doctype html>
+
+{% extends "common/base.html" %}
+
+{% block scripts %}
+    <script defer="defer" src="/static/js/main.js"> </script>
+    <link href="/static/css/main.css" rel="stylesheet">
+    <!--
+    <script defer="defer" src="http://pi3:3000/static/js/main.js"> </script>
+    <link href="http://pi3:3000/static/css/main.css" rel="stylesheet">
+    -->
+{% endblock %}
+
+{% block content %}
+    <div id="root" class="flex-grow-1">
+        <noscript>Javascript is required for this to function.</noscript>
+    </div>
+{% endblock %}

@@ -1,61 +1,8 @@
 <!doctype html>
 
-<html>
-    <head>
-        <title>Testing this</title>
+{% extends "common/base.html" %}
 
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, inital-scale=1.0" />
-        <!--
-        <link rel="icon" href="/favicon.ico"/>
-        <meta name="viewport" content="width=device-width,initial-scale=1"/>
-        <meta name="theme-color" content="#000000"/>
-        <meta name="description" content="Web site created using create-react-app"/>
-        <link rel="apple-touch-icon" href="/logo192.png"/>
-        <link rel="manifest" href="/manifest.json"/>
-        -->
-
-        <!-- main editor react app -->
-        <!--
-        <script defer="defer" src="http://pi3:3000/static/js/main.js"> </script>
-        <link href="http://pi3:3000/static/css/main.css" rel="stylesheet">
-        -->
-        <script defer="defer" src="/static/js/main.js"> </script>
-        <link href="/static/css/main.css" rel="stylesheet">
-
-        <!-- Bootstrap (CSS only) -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    </head>
-
-    <body>
-        <div class="d-flex flex-column">
-            <nav class="navbar navbar-expand bg-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Stuff</a>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#">Home</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#">Edit</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#">Explore</a>
-                            </li>
-                        </ul>
-                        <form class="d-flex">
-                            <button class="btn btn-outline-success" type="submit">Login</button>
-                        </form>
-                    </div>
-                </div>
-            </nav>
-
-            <div id="root" class="flex-grow-1">
-                <noscript>Javascript is required for this to function.</noscript>
-            </div>
-        </div>
-    </body>
-</html>
+{% block content %}
+    <h2>Welcome to this web sight!!</h2>
+    <marquee><span style="color: #ff0000">(Under construction)</span></marquee>
+{% endblock %}
