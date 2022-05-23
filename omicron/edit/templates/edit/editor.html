@@ -12,6 +12,12 @@
 {% endblock %}
 
 {% block content %}
+    <script>
+        /* slight hax: expose the project info to the react thing */
+        var projectID      = {{ project.id }};
+        var projectName    = "{{ project.name }}";
+    </script>
+
     <div id="root" class="flex-grow-1">
         <noscript>Javascript is required for this to function.</noscript>
     </div>

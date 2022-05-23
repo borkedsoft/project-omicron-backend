@@ -1,0 +1,15 @@
+{% extends "common/base.html" %}
+
+{% block content %}
+{% for proj in projects %}
+
+    <a href="{% url 'edit:editor' proj.id %}">
+    <b>{{ proj.name }}</b><br />
+    </a>
+
+    {% for code in proj.projectcode_set.all %}
+        <code>{{ code.name }} - {{ code.filepath }}</code>
+    {% endfor %}
+
+{% endfor %}
+{% endblock %}
