@@ -25,6 +25,40 @@ def create(request):
     now = timezone.now()
     p = Project(name=name, date_created=now, date_updated=now)
     p.save()
+
+    defaultCode = \
+    """
+import * as Square from './square.js';
+
+export function logic(ctx, delta) {
+}
+
+export function render(ctx, delta) {
+}
+
+export function loop(delta) {
+    var x = Square.square(delta);
+    console.log('testing this! ' + x);
+}
+    """
+
+    moduleTest = \
+    """
+export function square(x) {
+    return x * x;
+}
+    """
+
+    p.projectcode_set.create(name="main.js",
+                             code=defaultCode,
+                             date_created=timezone.now(),
+                             date_updated=timezone.now())
+
+    p.projectcode_set.create(name="square.js",
+                             code=moduleTest,
+                             date_created=timezone.now(),
+                             date_updated=timezone.now())
+
     return HttpResponseRedirect(reverse("edit:editor", kwargs={"projectID": p.id}))
 
 # return the javascript code corresponding to the given code ID
