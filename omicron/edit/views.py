@@ -62,8 +62,8 @@ export function square(x) {
     return HttpResponseRedirect(reverse("edit:editor", kwargs={"projectID": p.id}))
 
 # return the javascript code corresponding to the given code ID
-def code(request, codeID):
-    code = get_object_or_404(ProjectCode, pk=codeID)
+def code(request, pk):
+    code = get_object_or_404(ProjectCode, pk=pk)
     return HttpResponse(code.code, headers = { "Content-Type": "text/javascript" })
 
 # return javascript code contained in a project by name (used for javascript imports)
