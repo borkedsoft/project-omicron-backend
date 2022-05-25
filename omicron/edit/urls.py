@@ -10,6 +10,7 @@ urlpatterns = [
     path('editor/',                           views.create,   name="createProject"),
     path('editor/<int:projectID>/',           views.editor,   name="editor"),
     path('editor/<int:projectID>/<str:name>', views.projCode, name="projcode"),
+    path('editor/<int:projectID>/<str:nocache>/<str:name>', views.projCodeNocache, name="projcode-nocache"),
     path('code/<int:pk>/',                    views.code,     name="code"),
 
     path('api/',                              include(serializers.router.urls)),

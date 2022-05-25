@@ -64,10 +64,21 @@ export function square(x) {
 # return the javascript code corresponding to the given code ID
 def code(request, pk):
     code = get_object_or_404(ProjectCode, pk=pk)
-    return HttpResponse(code.code, headers = { "Content-Type": "text/javascript" })
+    return HttpResponse(code.code, headers = {
+        "Content-Type":  "text/javascript",
+        "Cache-Control": "no-cache",
+    })
 
 # return javascript code contained in a project by name (used for javascript imports)
 def projCode(request, projectID, name):
     proj = get_object_or_404(Project, pk=projectID)
     code = get_object_or_404(proj.projectcode_set, name=name)
-    return HttpResponse(code.code, headers = { "Content-Type": "text/javascript" })
+    return HttpResponse(code.code, headers = {
+        "Content-Type": "text/javascript",
+        "Cache-Control": "no-cache",
+    })
+
+# XXX: nocache is fake directory name generated randomly by the client
+#      to avoid module caching (so that all modules are always reloaded)
+def projCodeNocache(request, projectID, nocache, name):
+    return projCode(request, projectID, name)
