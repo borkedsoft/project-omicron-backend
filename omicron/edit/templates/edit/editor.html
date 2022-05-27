@@ -16,6 +16,7 @@
         /* slight hax: expose the project info to the react thing */
         var projectID      = {{ project.id }};
         var projectName    = "{{ project.name }}";
+        var projectURL     = "{% url 'edit:projectViewSet' project.id %}";
     </script>
 
     <div id="root" class="flex-grow-1">

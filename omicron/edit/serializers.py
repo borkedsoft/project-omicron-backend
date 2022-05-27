@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from edit.models import Project, ProjectCode
-from rest_framework import routers, serializers, viewsets, generics
+from rest_framework import routers, serializers, viewsets, generics, permissions
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
@@ -24,10 +24,17 @@ class ProjectSerializer(serializers.HyperlinkedModelSerializer):
 
 class ProjectCodeSerializer(serializers.HyperlinkedModelSerializer):
     codefile = CodeHyperlink(view_name = "edit:projcode")
+    codetext = serializers.HyperlinkedIdentityField(view_name = "edit:codeText")
 
     class Meta:
         model = ProjectCode
-        fields = ["name", "codefile", "date_created", "date_updated"]
+        #fields = ["name", "codefile", "date_created", "date_updated"]
+        fields = ["name", "codefile", "codetext", "date_created", "date_updated"]
+
+class CodeTextSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = ProjectCode
+        fields = ["code"]
 
 class ProjectViewSet(viewsets.ModelViewSet):
     queryset         = Project.objects.all()
@@ -36,6 +43,11 @@ class ProjectViewSet(viewsets.ModelViewSet):
 class ProjectCodeViewSet(viewsets.ModelViewSet):
     queryset         = ProjectCode.objects.all()
     serializer_class = ProjectCodeSerializer
+
+class CodeTextViewSet(generics.RetrieveUpdateDestroyAPIView):
+    queryset         = ProjectCode.objects.all()
+    serializer_class = CodeTextSerializer
+    #permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 class ProjectCodeList(generics.GenericAPIView):
     queryset         = Project.objects.all()
@@ -52,3 +64,6 @@ class ProjectCodeList(generics.GenericAPIView):
 router = routers.DefaultRouter()
 router.register(r'projects',    ProjectViewSet)
 router.register(r'projectCode', ProjectCodeViewSet)
+#router.register(r'codeText',    CodeTextViewSet)
+
+print(list(router.registry))

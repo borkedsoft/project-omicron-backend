@@ -16,4 +16,5 @@ urlpatterns = [
     path('api/',                              include(serializers.router.urls)),
     path('api/projects/<int:pk>/',            serializers.ProjectViewSet.as_view({"get": "list"}), name="projectViewSet"),
     path('api/projectCodeList/<int:pk>/',     serializers.ProjectCodeList.as_view(), name="projectCodeList"),
+    path('api/codeText/<int:pk>/',            serializers.CodeTextViewSet.as_view(), name="codeText"),
 ]
