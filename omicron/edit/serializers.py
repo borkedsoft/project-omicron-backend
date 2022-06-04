@@ -47,7 +47,7 @@ class ProjectCodeViewSet(viewsets.ModelViewSet):
 class CodeTextViewSet(generics.RetrieveUpdateDestroyAPIView):
     queryset         = ProjectCode.objects.all()
     serializer_class = CodeTextSerializer
-    #permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 class ProjectCodeList(generics.GenericAPIView):
     queryset         = Project.objects.all()

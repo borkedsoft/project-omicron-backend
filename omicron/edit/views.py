@@ -20,46 +20,59 @@ def explore(request):
             "projects": Project.objects.all()
         })
 
+defaultMain="""
+// entry point for your code, called once per frame.
+export function loop(delta) {
+    console.log('testing this! ' + delta);
+}
+"""
+
+defaultNew="""export default function yourFunction() {
+    /* Your code here */
+}
+"""
+
 def create(request):
     name = "Unnamed project"
     now = timezone.now()
     p = Project(name=name, date_created=now, date_updated=now)
     p.save()
 
-    defaultCode = \
-    """
-import * as Square from './square.js';
-
-export function logic(ctx, delta) {
-}
-
-export function render(ctx, delta) {
-}
-
-export function loop(delta) {
-    var x = Square.square(delta);
-    console.log('testing this! ' + x);
-}
-    """
-
-    moduleTest = \
-    """
-export function square(x) {
-    return x * x;
-}
-    """
-
     p.projectcode_set.create(name="main.js",
-                             code=defaultCode,
-                             date_created=timezone.now(),
-                             date_updated=timezone.now())
-
-    p.projectcode_set.create(name="square.js",
-                             code=moduleTest,
+                             code=defaultMain,
                              date_created=timezone.now(),
                              date_updated=timezone.now())
 
     return HttpResponseRedirect(reverse("edit:editor", kwargs={"projectID": p.id}))
+
+def createFile(request, pk):
+    error = None
+
+    if not request.user.is_authenticated:
+        error = "You are not logged in!"
+
+    elif "filename" not in request.POST:
+        error = "Filename field not included in the post request."
+
+    elif len(request.POST["filename"]) == 0:
+        error = "No filename provided."
+    
+    if error:
+        return HttpResponse(error)
+
+    else:
+        newname = request.POST["filename"]
+
+        if newname[-3:] != ".js":
+            newname += ".js"
+
+        proj = get_object_or_404(Project, pk=pk)
+        proj.projectcode_set.create(name=newname,
+                                    code=defaultNew,
+                                    date_created=timezone.now(),
+                                    date_updated=timezone.now())
+
+        return HttpResponse("File created")
 
 # return the javascript code corresponding to the given code ID
 def code(request, pk):

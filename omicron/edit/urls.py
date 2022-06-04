@@ -11,7 +11,8 @@ urlpatterns = [
     path('editor/<int:projectID>/',           views.editor,   name="editor"),
     path('editor/<int:projectID>/<str:name>', views.projCode, name="projcode"),
     path('editor/<int:projectID>/<str:nocache>/<str:name>', views.projCodeNocache, name="projcode-nocache"),
-    path('code/<int:pk>/',                    views.code,     name="code"),
+    path('code/<int:pk>/',                    views.code,       name="code"),
+    path('createFile/<int:pk>/',              views.createFile, name="code"),
 
     path('api/',                              include(serializers.router.urls)),
     path('api/projects/<int:pk>/',            serializers.ProjectViewSet.as_view({"get": "list"}), name="projectViewSet"),
